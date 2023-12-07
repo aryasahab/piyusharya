@@ -1,1 +1,1 @@
-# piyusharya
+AMP practicals

@@ -1,0 +1,60 @@
+QR method-
+
+Clc
+clear
+a=[2 -%i 2*%i;%i 4 3;-2*%i 3 5]
+b=spec(a)
+for i=1:20
+[Q,R]=qr(a)
+a=R*Q
+disp(a,R)
+end
+
+
+
+POWER SERIES:-
+clc
+a=[1 -%i 3+4*%i;%i 2 4;3-4*%i 4 3]
+x0=[1 1 1]
+tol=0.0001
+err=1
+k=1
+lambda0=1
+while (abs(err)>tol)
+x1=x0*a
+lambda1=max(abs(x1))
+x0=x1/lambda1
+err=abs(lambda0-lambda1)
+lambda0=lambda1
+disp(k,lambda1,x0/norm(x0))
+k=k+1
+end
+[E,d]=spec(a)
+disp("Eigen vector ",E)
+disp("Eigen value ",d)
+
+
+
+INVERSE POWER:-
+clc
+a=[2 1 1;1 3 2;3 1 4]
+b=inv(a)
+u=[1 1 1]
+x0=u'
+tol=0.0001
+err=1
+k=1
+lam0=1
+while(abs(err)>tol)
+x1=b*x0
+lam1=max(abs(x1))
+x0=x1/lam1
+err=abs(lam0-lam1)
+lam0=lam1
+disp("iteration ",k)
+disp("eigen value",1/lam1)
+disp(x0/norm(x0))
+k=k+1
+end
+[E,d]=spec(a)
+disp(E,d)

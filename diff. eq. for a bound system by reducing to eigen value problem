@@ -1,0 +1,27 @@
+//infinite potential well
+clf
+hbar = 1973
+m = 0.511e6
+xmin = 0
+xmax = 5
+n = 1000
+x = linspace(xmin, xmax, n)
+d = x(2) - x(1)
+V = zeros(n, 1)
+V_inf = 1e10
+V(x < xmin | x > xmax) = V_inf
+K = eye(n, n) * (-2)
+for i = 1:(n - 1)
+K(i, i + 1) = 1
+K(i + 1, i) = 1
+end
+H = (-(hbar^2) / (2 * m * d^2)) * K + diag(V)
+[U, EV] = spec(H)
+E = diag(EV);
+disp("ground state energy "+string(E(1))+" eV ","1st excited state energy " +string(E(2))+" eV")
+for i = 1:2
+subplot(3, 1, 2*i-1)
+plot2d(x', U(:,i),i)
+xtitle("Graph for ψ(" + string(i) + ")")
+xgrid(2)
+end
